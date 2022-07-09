@@ -2,13 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0cb67ecc-0d8b-463c-b2ac-2364fa0fb846" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/engine.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/entity.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game_map.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/procgen.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/entity_factories.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/actions.py" beforeDir="false" afterPath="$PROJECT_DIR$/actions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity.py" beforeDir="false" afterPath="$PROJECT_DIR$/entity.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game_map.py" beforeDir="false" afterPath="$PROJECT_DIR$/game_map.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/input_handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/input_handlers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/procgen.py" beforeDir="false" afterPath="$PROJECT_DIR$/procgen.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tile_types.py" beforeDir="false" afterPath="$PROJECT_DIR$/tile_types.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +109,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>54</line>
+          <line>57</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
