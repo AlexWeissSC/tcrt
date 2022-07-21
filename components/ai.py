@@ -113,3 +113,17 @@ class HostileEnemy(BaseAI):
             ).perform()
 
         return WaitAction(self.entity).perform()
+
+class StandingEnemy(BaseAI):
+    def __init__(self, entity: Actor):
+        super().__init__(entity)
+        self.path: List[Tuple[int, int]] = []
+
+    def perform(self) -> None:
+        target = self.engine.player
+        dx = target.x - self.entity.x
+        dy = target.y - self.entity.y
+        distance = max(abs(dx), abs(dy)) # Chebyshev distance.
+
+
+        return WaitAction(self.entity).perform()

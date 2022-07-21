@@ -2,7 +2,7 @@ from typing import Tuple
 
 import numpy as np # type: ignore
 
-# Tile grapics structured type compatible with Console.tiles_rgb.
+# Tile graphics structured type compatible with Console.tiles_rgb.
 graphic_dt = np.dtype(
     [
         ("ch", np.int32), # Unicode codepoint.
@@ -37,15 +37,26 @@ SHROUD = np.array((ord(" "), (255, 255, 255), (0, 0, 0)), dtype=graphic_dt)
 floor = new_tile(
     walkable= True,
     transparent=True,
-    dark=(ord(" "), (255, 255, 255), (50, 50, 150)),
-    light=(ord(" "), (255, 255, 255), (200, 180, 50)),
+    #dark=(ord(" "), (255, 255, 255), (50, 50, 150)),
+    dark=(ord(" "), (255, 255, 255), (71, 45, 60)),
+    #light=(ord(" "), (255, 255, 255), (200, 180, 50)),
+    light=(ord(" "), (255, 255, 255), (104, 69, 89)),
 )
 
 wall = new_tile(
     walkable=False,
     transparent=False,
-    dark=(ord(" "), (255, 255, 255), (0, 0, 100)),
-    light=(ord(" "), (255, 255, 255), (130, 110, 50)),
+    #dark=(ord(" "), (255, 255, 255), (0, 0, 100)),
+    dark=(ord(chr(0x2591)), (160, 153, 142), (102, 102, 102)),
+    #light=(ord(" "), (255, 255, 255), (130, 110, 50)),
+    light=(ord(chr(0x2591)), (160, 153, 142), (102, 102, 102)),
+)
+
+down_stairs = new_tile(
+    walkable=True,
+    transparent=True,
+    dark=(ord(">"), (191, 121, 88), (71, 45, 60)),
+    light=(ord(">"), (191, 121, 88), (104, 69, 89)),
 )
 
 # Wall with glyph chr(0x2550)

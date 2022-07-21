@@ -170,3 +170,7 @@ API
 Training
 Blog
 About
+
+
+# Saved games
+*.sav

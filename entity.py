@@ -10,8 +10,11 @@ from render_order import RenderOrder
 if TYPE_CHECKING:
     from components.at import BaseAI
     from components.consumable import Consumable
+    from components.equipment import Equipment
+    from components.equippable import Equippable
     from components.fighter import Fighter
     from components.inventory import Inventory
+    from components.level import Level
     from game_map import GameMap
 
 T = TypeVar("T", bound="Entity")
@@ -92,8 +95,10 @@ class Actor(Entity):
         color: Tuple[int, int, int] = (255, 255, 255),
         name: str = "<Unnames>",
         ai_cls: Type[BaseAI],
+        equipment: Equipment,
         fighter: Fighter,
         inventory: Inventory,
+        level: Level,
     ):
         super().__init__(
             x=x,
@@ -107,11 +112,16 @@ class Actor(Entity):
 
         self.ai: Optional[BaseAI] = ai_cls(self)
 
+        self.equipment: Equipment = equipment
+        self.equipment.parent = self
+
         self.fighter = fighter
         self.fighter.parent = self
 
         self.inventory = inventory
         self.inventory.parent = self
+        self.level = level
+        self.level.parent = self
 
     @property
     def is_alive(self) -> bool:
@@ -127,7 +137,8 @@ class Item(Entity):
         char: str = "?",
         color: Tuple[int, int, int] = (255, 255, 255),
         name: str = "<Unnamed>",
-        consumable: Consumable,
+        consumable: Optional[Consumable] = None,
+        equippable: Optional[Equippable] = None,
     ):
         super().__init__(
             x=x,
@@ -140,4 +151,10 @@ class Item(Entity):
         )
 
         self.consumable = consumable
-        self.consumable.parent = self
+        if self.consumable:
+            self.consumable.parent = self
+
+        self.equippable = equippable
+
+        if self.equippable:
+            self.equippable.parent = self
