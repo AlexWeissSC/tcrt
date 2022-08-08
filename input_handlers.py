@@ -5,6 +5,7 @@ import os
 from typing import Callable, Optional, TYPE_CHECKING, Union
 
 import tcod.event
+import math
 
 import actions
 from actions import (
@@ -154,6 +155,10 @@ class EventHandler(BaseEventHandler):
 
 
     def ev_mousemotion(self, event: tcod.event.MouseMotion) -> None:
+       # print(f'Mouse tile location ({event.tile.x}, {event.tile.y})')
+       # print(f'Player tile location ({self.engine.player.x}, {self.engine.player.y})')
+       # x1,y1,x2,y2 = self.engine.game_map.get_viewport()
+       # print(f'Viewport offset ({x1},{y1})')
         if self.engine.game_map.in_bounds(event.tile.x, event.tile.y):
             self.engine.mouse_location = event.tile.x, event.tile.y
 
@@ -333,7 +338,7 @@ class InventoryEventHandler(AskUserEventHandler):
 
         y = 0
 
-        width = len(self.TITLE) + 4
+        width = len(self.TITLE) + 6#4
 
         console.draw_frame(
             x=x,
@@ -409,12 +414,15 @@ class SelectIndexHandler(AskUserEventHandler):
         """Sets the cursor to the player when this handler is constructed."""
         super().__init__(engine)
         player = self.engine.player
-        engine.mouse_location = player.x, player.y
+        viewport = self.engine.game_map.get_viewport()
+        engine.mouse_location = player.x - viewport[0], player.y-viewport[1]
+
 
     def on_render(self, console: tcod.Console) -> None:
         """Highlight the tile under the cursor."""
         super().on_render(console)
         x, y = self.engine.mouse_location
+
         console.tiles_rgb["bg"][x, y] = color.white
         console.tiles_rgb["fg"][x, y] = color.black
 
@@ -449,7 +457,10 @@ class SelectIndexHandler(AskUserEventHandler):
         """Left click confirms a selection."""
         if self.engine.game_map.in_bounds(*event.tile):
             if event.button == 1:
-                return self.on_index_selected(*event.tile)
+                viewport = self.engine.game_map.get_viewport()
+                x = event.tile.x + viewport[0]
+                y = event.tile.y + viewport[1]
+                return self.on_index_selected(x,y)#(*event.tile)
         return super().ev_mousebuttondown(event)
 
     def on_index_selected(self, x: int, y: int) -> Optional[ActionOrHandler]:
@@ -464,6 +475,7 @@ class LookHandler(SelectIndexHandler):
         """Return to main handler."""
         return MainGameEventHandler(self.engine)
 
+
 class SingleRangedAttackHandler(SelectIndexHandler):
     """Handles targeting a single enemy. Only the enemy selected will be affected."""
 
@@ -474,8 +486,13 @@ class SingleRangedAttackHandler(SelectIndexHandler):
 
         self.callback = callback
 
-    def on_index_selected(self, x: int, y: int) -> Optional[Action]:
+    def on_index_selected(self, x, y):
+        v_x, v_y, v_x1, v_y1 = self.engine.game_map.get_viewport()
+        x += v_x
+        y += v_y
         return self.callback((x, y))
+    #def on_index_selected(self, x: int, y: int) -> Optional[Action]:
+    #    return self.callback((x, y))
 
 class AreaRangedAttackHandler(SelectIndexHandler):
     """Handles targeting an area within a given radius. Any entity within the area will be affected."""
@@ -494,7 +511,7 @@ class AreaRangedAttackHandler(SelectIndexHandler):
     def on_render(self, console: tcod.Console) -> None:
         """Highlight the tile under the cursor."""
         super().on_render(console)
-
+        #viewport = self.engine.game_map.get_viewport()
         x, y = self.engine.mouse_location
 
         # Draw a rectangle around the targeted area, so the player can see the affected tiles.
@@ -507,9 +524,14 @@ class AreaRangedAttackHandler(SelectIndexHandler):
             clear=False,
         )
 
-    def on_index_selected(self, x: int, y: int) -> Optional[Action]:
-        return self.callback((x, y))
+    #def on_index_selected(self, x: int, y: int) -> Optional[Action]:
+    #    return self.callback((x, y))
 
+    def on_index_selected(self, x: int, y: int) -> Optional[Action]:
+        v_x, v_y, v_x1, v_y1 = self.engine.game_map.get_viewport()
+        x += v_x
+        y += v_y
+        return self.callback((x, y))
 
 class MainGameEventHandler(EventHandler):
 
@@ -547,7 +569,7 @@ class MainGameEventHandler(EventHandler):
             return InventoryDropHandler(self.engine)
         elif key == tcod.event.K_c:
             return CharacterScreenEventHandler(self.engine)
-        elif key == tcod.event.K_SLASH:
+        elif key == tcod.event.K_o:
             return LookHandler(self.engine)
 
         # No valid key was pressed

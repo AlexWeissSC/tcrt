@@ -43,6 +43,125 @@ floor = new_tile(
     light=(ord(" "), (255, 255, 255), (104, 69, 89)),
 )
 
+grass = new_tile(
+    walkable=True,
+    transparent=True,
+    dark=(ord(chr(0x25AC)), (13, 51, 26), (26, 99, 51)),
+    light=(ord(chr(0x25AC)), (21, 81, 42), (36, 135, 70)),
+)
+
+flowers = new_tile(
+    walkable=True,
+    transparent=True,
+    dark=(ord(chr(0x21A8)), (255, 255, 255), (26, 99, 51)),
+    light=(ord(chr(0x21A8)), (255, 255, 255), (36, 135, 70)),
+)
+
+tree1 = new_tile(
+    walkable=False,
+    transparent=False,
+    dark=(ord(chr(0x2591)), (13, 51, 26), (26, 99, 51)),
+    light=(ord(chr(0x2591)), (21, 81, 42), (36, 135, 70)),
+)
+
+oldtree = new_tile(
+    walkable=False,
+    transparent=False,
+    dark=(ord(chr(0x2194)), (191, 121, 88), (26, 99, 51)),
+    light=(ord(chr(0x2194)), (191, 121, 88), (36, 135, 70)),
+)
+
+pavement = new_tile(
+    walkable=True,
+    transparent=True,
+    dark=(ord(chr(0x2593)), (73, 41, 45), (0, 0, 0)),
+    light=(ord(chr(0x2593)), (122, 68, 74), (71, 45, 60)),
+)
+
+street = new_tile(
+    walkable=True,
+    transparent=True,
+    dark=(ord(" "), (0, 0, 0), (0, 0, 0)),
+    light=(ord(" "), (0, 0, 0), (71, 45, 60)),
+)
+
+streetline_v = new_tile(
+    walkable=True,
+    transparent=True,
+    dark=(ord(chr(0x2248)), (73, 41, 45), (0, 0, 0)),
+    light=(ord(chr(0x2248)), (122, 68, 74), (71, 45, 60)),
+)
+
+streetline_h = new_tile(
+    walkable=True,
+    transparent=True,
+    dark=(ord(chr(0x25A0)), (73, 41, 45), (0, 0, 0)),
+    light=(ord(chr(0x25A0)), (122, 68, 74), (71, 45, 60)),
+)
+
+streetline_c_ur = new_tile(
+    walkable=True,
+    transparent=True,
+    dark=(ord(chr(0xB0)), (73, 41, 45), (0, 0, 0)),
+    light=(ord(chr(0xB0)), (122, 68, 74), (71, 45, 60)),
+)
+
+streetline_c_ul = new_tile(
+    walkable=True,
+    transparent=True,
+    dark=(ord(chr(0xA0)), (73, 41, 45), (0, 0, 0)),
+    light=(ord(chr(0xA0)), (122, 68, 74), (71, 45, 60)),
+)
+
+streetline_c_dr = new_tile(
+    walkable=True,
+    transparent=True,
+    dark=(ord(chr(0xB2)), (73, 41, 45), (0, 0, 0)),
+    light=(ord(chr(0xB2)), (122, 68, 74), (71, 45, 60)),
+)
+
+streetline_c_dl = new_tile(
+    walkable=True,
+    transparent=True,
+    dark=(ord(chr(0x207F)), (73, 41, 45), (0, 0, 0)),
+    light=(ord(chr(0x207F)), (122, 68, 74), (71, 45, 60)),
+)
+
+streetline_t_u = new_tile(
+    walkable=True,
+    transparent=True,
+    dark=(ord(chr(0x2219)), (73, 41, 45), (0, 0, 0)),
+    light=(ord(chr(0x2219)), (122, 68, 74), (71, 45, 60)),
+)
+
+streetline_t_d = new_tile(
+    walkable=True,
+    transparent=True,
+    dark=(ord(chr(0x221A)), (73, 41, 45), (0, 0, 0)),
+    light=(ord(chr(0x221A)), (122, 68, 74), (71, 45, 60)),
+)
+
+streetline_t_l = new_tile(
+    walkable=True,
+    transparent=True,
+    dark=(ord(chr(0xF7)), (73, 41, 45), (0, 0, 0)),
+    light=(ord(chr(0xF7)), (122, 68, 74), (71, 45, 60)),
+)
+
+streetline_t_r = new_tile(
+    walkable=True,
+    transparent=True,
+    dark=(ord(chr(0x2321)), (73, 41, 45), (0, 0, 0)),
+    light=(ord(chr(0x2321)), (122, 68, 74), (71, 45, 60)),
+)
+
+streetline_cross = new_tile(
+    walkable=True,
+    transparent=True,
+    dark=(ord(chr(0xB7)), (73, 41, 45), (0, 0, 0)),
+    light=(ord(chr(0xB7)), (122, 68, 74), (71, 45, 60)),
+)
+
 wall = new_tile(
     walkable=False,
     transparent=False,
@@ -50,6 +169,20 @@ wall = new_tile(
     dark=(ord(chr(0x2591)), (160, 153, 142), (102, 102, 102)),
     #light=(ord(" "), (255, 255, 255), (130, 110, 50)),
     light=(ord(chr(0x2591)), (160, 153, 142), (102, 102, 102)),
+)
+
+window = new_tile(
+    walkable=False,
+    transparent=True,
+    dark=(ord(chr(0x2592)), (160, 153, 142), (102, 102, 102)),
+    light=(ord(chr(0x2592)), (160, 153, 142), (102, 102, 102)),
+)
+
+fence = new_tile(
+    walkable=False,
+    transparent=True,
+    dark=(ord(chr(0xF3)), (191, 121, 88), (26, 99, 51)),
+    light=(ord(chr(0xF3)), (191, 121, 88), (26, 99, 51)),
 )
 
 down_stairs = new_tile(

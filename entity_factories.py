@@ -47,7 +47,7 @@ hound = Actor(
 """-------Furniture-------"""
 
 door = Actor(
-    char=chr(0x2660),
+    char=chr(0xD1),
     color=(191, 121, 88),
     name="Door",
     ai_cls=StandingEnemy,
@@ -74,9 +74,9 @@ fireball_scroll = Item(
 )
 
 health_potion = Item(
-    char="!",
+    char=chr(0x22),
     color=(127, 0, 255),
-    name="Health Potion",
+    name="Health Pack",
     consumable=consumable.HealingConsumable(amount=4),
 )
 
@@ -91,15 +91,15 @@ lightning_scroll = Item(
 """-------Equipment-------"""
 
 dagger = Item(
-    char=chr(0x2666), color=(0, 191, 255), name="Dagger", equippable=equippable.Dagger()
+    char=chr(0x2666), color=(0, 191, 255), name="Kitchen Knife", equippable=equippable.Dagger()
 )
 
-sword = Item(char=chr(0x2666), color=(0, 191, 255), name="Sword", equippable=equippable.Sword())
+sword = Item(char=chr(0x24), color=(0, 191, 255), name="Baseball Bat", equippable=equippable.Sword())
 
 leather_armor = Item(
     char=chr(0x2663),
     color=(139, 69, 19),
-    name="Leather Armor",
+    name="Leather Jacket",
     equippable=equippable.LeatherArmor(),
 )
 

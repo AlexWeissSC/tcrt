@@ -23,8 +23,15 @@ background_image = tcod.image.load("data\menu_background.png")[:, :, :3]
 
 def new_game() -> Engine:
     """Return a brand new game session as an Engine instance."""
-    map_width = 80
-    map_height = 43
+    map_width = 1000 #80
+    map_height = 1000 #43
+
+    # The map can be bigger than the render able area
+    # This is the size of the viewport the player sees
+    # of the map
+
+    viewport_width = 60 #80
+    viewport_height = 43 #43
 
     room_max_size = 10
     room_min_size = 6
@@ -41,13 +48,15 @@ def new_game() -> Engine:
         room_max_size=room_max_size,
         map_width=map_width,
         map_height=map_height,
+        viewport_width=viewport_width,  # new
+        viewport_height=viewport_height,  # new
     )
 
     engine.game_world.generate_floor()
     engine.update_fov()
 
     engine.message_log.add_message(
-        "Hello and welcome, adventurer, to yet another dungeon!", color.welcome_text
+        "Wake up and get moving!", color.welcome_text
     )
 
     dagger = copy.deepcopy(entity_factories.dagger)

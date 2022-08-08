@@ -47,6 +47,24 @@ class Engine:
     def render(self, console: Console) -> None:
         self.game_map.render(console)
 
+        info_pane_x = self.game_world.viewport_width
+        info_pane_width = console.width - info_pane_x
+        info_pane_height = self.game_world.viewport_height
+        # This is debug info.  Remove it later
+        info_pane_title = f'({self.player.x},{self.player.y})'
+
+        #Side Window
+        render_functions.draw_window(console, info_pane_x, 0, info_pane_width, info_pane_height, info_pane_title)
+
+        sub_pane_x = info_pane_x + 1
+        sub_pane_width = info_pane_width - 2
+
+        bar_pane_x = sub_pane_x
+        bar_pane_y = 1
+        bar_pane_width = sub_pane_width
+        bar_pane_height = 5
+        #render_functions.draw_window(console, bar_pane_x, bar_pane_y, bar_pane_width, bar_pane_height, '')
+
         self.message_log.render(console=console, x=21, y=45, width=40, height=5)
 
         render_functions.render_bar(
@@ -62,7 +80,7 @@ class Engine:
             location=(0, 47),
         )
 
-        render_functions.render_names_at_mouse_lcation(
+        render_functions.render_names_at_mouse_location(
             console=console, x=21, y=44, engine=self
         )
 
