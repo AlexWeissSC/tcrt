@@ -34,7 +34,7 @@ max_doors_by_floor = [
 ]
 
 item_chances: Dict[int, List[Tuple[Entity, int]]] = {
-    0: [(entity_factories.health_potion, 35), (entity_factories.fireball_scroll, 45), (entity_factories.confusion_scroll, 20)],
+    0: [(entity_factories.health_potion, 35), (entity_factories.fireball_scroll, 20), (entity_factories.confusion_scroll, 45)],
     2: [(entity_factories.confusion_scroll, 10)],
     4: [(entity_factories.lightning_scroll, 25), (entity_factories.sword, 5)],
     6: [(entity_factories.fireball_scroll, 25), (entity_factories.chain_mail, 15)],
@@ -48,10 +48,10 @@ enemy_chances: Dict[int, List[Tuple[Entity, int]]] = {
 }
 
 door_chances: Dict[int, List[Tuple[Entity, int]]] = {
-    0: [(entity_factories.door, 20)],
-    3: [(entity_factories.door, 15)],
-    5: [(entity_factories.door, 30)],
-    7: [(entity_factories.door, 60)],
+    0: [(entity_factories.wooden_door, 100)],
+    3: [(entity_factories.metal_door, 100)],
+    5: [(entity_factories.wooden_door, 100)],
+    7: [(entity_factories.wooden_door, 100)],
 }
 def get_max_value_for_floor(
     max_value_by_floor: List[Tuple[int, int]], floor: int
@@ -144,10 +144,11 @@ def place_entities(room: RectangularRoom, dungeon: GameMap, floor_number: int,) 
         if not any(entity.x == x and entity.y == y for entity in dungeon.entities):
             entity.spawn(dungeon, x, y)
 
+
 def place_doors(room: RectangularRoom, dungeon: GameMap, floor_number: int,) -> None:
-    number_of_doors = random.randint(
-        0, get_max_value_for_floor(max_doors_by_floor, floor_number)
-    )
+    number_of_doors = 3#random.randint(
+        #0, get_max_value_for_floor(max_doors_by_floor, floor_number)
+    #)
 
     doors: List[Entity] = get_entities_at_random(
         door_chances, number_of_doors, floor_number
@@ -164,8 +165,8 @@ def place_doors(room: RectangularRoom, dungeon: GameMap, floor_number: int,) -> 
         width = x2 - x1
         height = y2 - x1
 
-        x = x1
-        y = int((y1 + y2) / 2)
+        x = int((x1 + x2) / 2) #x1
+        y = y1
         #center_x = int((self.x1 + self.x2) / 2)
         #center_y = int((self.y1 + self.y2) / 2)
         #if not self.engine.game_map.tiles["walkable"][dest_x, dest_y]:
@@ -175,7 +176,10 @@ def place_doors(room: RectangularRoom, dungeon: GameMap, floor_number: int,) -> 
             # Destination is blocked by a tile.
         if not any(entity.x == x and entity.y == y for entity in dungeon.entities):
             entity.spawn(dungeon, x, y)
+            dungeon.tiles[x, y] = tile_types.closed_door
 
+def place_open_doors(dungeon: GameMap, x: int, y: int) -> None:
+    dungeon.tiles[x, y] = tile_types.open_door
 
 def tunnel_between(
     start: Tuple[int, int], end: Tuple[int, int],
@@ -293,8 +297,8 @@ def generate_arkham(
     center_of_last_room = (0, 0)
 
     for r in range(max_rooms):
-        room_width = 10
-        room_height = 15
+        room_width = 10#10
+        room_height = 15#15
 
         x = 20 + r
         y = 15
@@ -383,6 +387,11 @@ def generate_arkham(
         #fence
         dungeon.tiles[15:20, 29] = tile_types.fence
 
+        # grass
+        dungeon.tiles[10:70, 35] = tile_types.grass
+
+        #water
+        dungeon.tiles[10:70, 36:40] = tile_types.water
 
 
 

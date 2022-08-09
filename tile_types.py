@@ -171,6 +171,20 @@ wall = new_tile(
     light=(ord(chr(0x2591)), (160, 153, 142), (102, 102, 102)),
 )
 
+closed_door = new_tile(
+    walkable=True,
+    transparent=False,
+    dark=(ord(chr(0xD1)), (160, 153, 142), (71, 45, 60)),
+    light=(ord(chr(0xD1)), (160, 153, 142), (104, 69, 89)),
+)
+
+open_door = new_tile(
+    walkable=True,
+    transparent=True,
+    dark=(ord(chr(0xAA)), (160, 153, 142), (71, 45, 60)),
+    light=(ord(chr(0xAA)), (160, 153, 142), (104, 69, 89)),
+)
+
 window = new_tile(
     walkable=False,
     transparent=True,
@@ -183,6 +197,13 @@ fence = new_tile(
     transparent=True,
     dark=(ord(chr(0xF3)), (191, 121, 88), (26, 99, 51)),
     light=(ord(chr(0xF3)), (191, 121, 88), (26, 99, 51)),
+)
+
+water = new_tile(
+    walkable=False,
+    transparent=True,
+    dark=(ord(chr(0x2568)), (37, 109, 135), (50, 146, 181)),
+    light=(ord(chr(0x2568)), (47, 135, 168), (60, 172, 215)),
 )
 
 down_stairs = new_tile(
