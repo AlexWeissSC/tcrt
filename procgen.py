@@ -17,7 +17,7 @@ if TYPE_CHECKING:
     from entity import Entity
 
 max_items_by_floor = [
-    (1, 1),
+    (1, 3),
     (4, 2),
 ]
 
@@ -34,7 +34,7 @@ max_doors_by_floor = [
 ]
 
 item_chances: Dict[int, List[Tuple[Entity, int]]] = {
-    0: [(entity_factories.health_potion, 35), (entity_factories.fireball_scroll, 20), (entity_factories.confusion_scroll, 45)],
+    0: [(entity_factories.health_potion, 5), (entity_factories.fireball_scroll, 5), (entity_factories.bookcase, 90)],
     2: [(entity_factories.confusion_scroll, 10)],
     4: [(entity_factories.lightning_scroll, 25), (entity_factories.sword, 5)],
     6: [(entity_factories.fireball_scroll, 25), (entity_factories.chain_mail, 15)],
@@ -376,6 +376,7 @@ def generate_arkham(
 
         #grass
         dungeon.tiles[15:20, 15:30] = tile_types.grass
+        entity_factories.health_potion.spawn(dungeon, 15, 15)
 
         #flower
         dungeon.tiles[17, 16] = tile_types.flowers

@@ -4,6 +4,7 @@ from components.equipment import Equipment
 from components.fighter import Fighter
 from components.furniture import Door
 from components.inventory import Inventory
+from components.furniture import Searchable
 from components.level import Level
 from entity import Actor, Item
 
@@ -46,7 +47,16 @@ hound = Actor(
 )
 
 """-------Furniture-------"""
-
+bookcase = Actor(
+    char=chr(0xC9),
+    color=(191, 121, 88),
+    name="Bookcase",
+    ai_cls=StandingEnemy,
+    equipment=Equipment(),
+    fighter=Searchable(hp=1, base_defense=0, base_power=4, char_open=chr(0xC9), loot="sword"),
+    inventory=Inventory(capacity=0),
+    level=Level(xp_given=0),
+)
 
 """-------Doors-------"""
 wooden_door = Actor(

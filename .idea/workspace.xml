@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0cb67ecc-0d8b-463c-b2ac-2364fa0fb846" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/components/furniture.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/color.py" beforeDir="false" afterPath="$PROJECT_DIR$/color.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/furniture.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/furniture.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/Redjack17_kenney.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/Redjack17_kenney.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entity_factories.py" beforeDir="false" afterPath="$PROJECT_DIR$/entity_factories.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/procgen.py" beforeDir="false" afterPath="$PROJECT_DIR$/procgen.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/savegame.sav" beforeDir="false" afterPath="$PROJECT_DIR$/savegame.sav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tile_types.py" beforeDir="false" afterPath="$PROJECT_DIR$/tile_types.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
