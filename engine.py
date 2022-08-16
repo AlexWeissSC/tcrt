@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import lzma
 import pickle
+import color
+import tcod
 
 from typing import TYPE_CHECKING
 
@@ -51,7 +53,9 @@ class Engine:
         info_pane_width = console.width - info_pane_x
         info_pane_height = self.game_world.viewport_height
         # This is debug info.  Remove it later
-        info_pane_title = f'({self.player.x},{self.player.y})'
+        # info_pane_title = f'({self.player.x},{self.player.y})'
+        # control info
+        info_pane_title = f'Controls'
 
         #Side Window
         render_functions.draw_window(console, info_pane_x, 0, info_pane_width, info_pane_height, info_pane_title)
@@ -64,6 +68,26 @@ class Engine:
         bar_pane_width = sub_pane_width
         bar_pane_height = 5
         #render_functions.draw_window(console, bar_pane_x, bar_pane_y, bar_pane_width, bar_pane_height, '')
+        console.print_box(x=sub_pane_x, y=2, width=sub_pane_width, height=1, fg=color.window_border_bright, string=f'i....Inventory',
+                          alignment=tcod.CENTER)
+        console.print_box(x=sub_pane_x, y=4, width=sub_pane_width, height=1, fg=color.window_border_bright,
+                          string=f'o....Look around',
+                          alignment=tcod.CENTER)
+        console.print_box(x=sub_pane_x, y=6, width=sub_pane_width, height=1, fg=color.window_border_bright,
+                          string=f'g....Pickup',
+                          alignment=tcod.CENTER)
+        console.print_box(x=sub_pane_x, y=8, width=sub_pane_width, height=1, fg=color.window_border_bright,
+                          string=f'd....Drop',
+                          alignment=tcod.CENTER)
+        console.print_box(x=sub_pane_x, y=10, width=sub_pane_width, height=1, fg=color.window_border_bright,
+                          string=f'c....Character information',
+                          alignment=tcod.CENTER)
+        console.print_box(x=sub_pane_x, y=12, width=sub_pane_width, height=1, fg=color.window_border_bright,
+                          string=f'v....Message history',
+                          alignment=tcod.CENTER)
+        console.print_box(x=sub_pane_x, y=14, width=sub_pane_width, height=1, fg=color.window_border_bright,
+                          string=f'. ....Wait',
+                          alignment=tcod.CENTER)
 
         self.message_log.render(console=console, x=21, y=45, width=40, height=5)
 

@@ -9,21 +9,24 @@ import exceptions
 import input_handlers
 import setup_game
 
+
 def save_game(handler: input_handlers.BaseEventHandler, filename: str) -> None:
     """If the current event handler has an active Engine then save it."""
     if isinstance(handler, input_handlers.EventHandler):
         handler.engine.save_as(filename)
         print("Game saved.")
 
+
 def main() -> None:
     screen_width = 80
     screen_height = 50
 
-
-    # The font has 16 chars in a row, and there's a total of 16 rows. Increase the "10" when you add new rows to the sample font file
-    #tileset = tcod.tileset.load_tilesheet(
+    # The font has 16 chars in a row, and there's a total of 16 rows.
+    # Increase the "10" when you add new rows to the sample font file
+    # tileset = tcod.tileset.load_tilesheet(
     #    "data\dejavu16x16_gs_tc.png", 32, 8, tcod.tileset.CHARMAP_TCOD
-    #)
+    # )
+
     tileset = tcod.tileset.load_tilesheet(
         "data\Redjack17_kenney.png", 16, 16, tcod.tileset.CHARMAP_CP437
     )
@@ -62,8 +65,6 @@ def main() -> None:
         except BaseException:  # Save on any other unexpected exception.
             save_game(handler, "savegame.sav")
             raise
-
-
 
 
 if __name__ == "__main__":
