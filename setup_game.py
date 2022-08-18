@@ -33,9 +33,10 @@ def new_game() -> Engine:
     viewport_width = 60 #80
     viewport_height = 43 #43
 
-    room_max_size = 10
-    room_min_size = 6
-    max_rooms = 30
+    room_max_size = 40
+    room_min_size = 30
+    max_rooms = 12
+    house_per_street = 6
 
     player = copy.deepcopy(entity_factories.player)
 
@@ -44,6 +45,7 @@ def new_game() -> Engine:
     engine.game_world = GameWorld(
         engine=engine,
         max_rooms=max_rooms,
+        house_per_street=house_per_street,
         room_min_size=room_min_size,
         room_max_size=room_max_size,
         map_width=map_width,

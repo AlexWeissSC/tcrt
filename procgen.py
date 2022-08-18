@@ -202,6 +202,7 @@ def tunnel_between(
     for x, y in tcod.los.bresenham((corner_x, corner_y), (x2, y2)).tolist():
         yield x, y
 
+
 def draw_street(
     start: Tuple[int, int], end: Tuple[int, int],
 ) -> Iterator[Tuple[int, int]]:
@@ -280,7 +281,7 @@ def generate_dungeon(
 
     return dungeon
 
-def generate_arkham(
+def generate_arkham_old(
         max_rooms: int,
         room_min_size: int,
         room_max_size: int,
@@ -427,3 +428,174 @@ def generate_arkham(
 
 
     return dungeon
+
+def generate_arkham(
+        max_rooms: int,
+        house_per_street: int,
+        room_min_size: int,
+        room_max_size: int,
+        map_width: int,
+        map_height: int,
+        engine: Engine,
+) -> GameMap:
+    """Generate a new dungeon map."""
+    player = engine.player
+    dungeon = GameMap(engine, map_width, map_height, entities=[player])
+
+    rooms: List[RectangularRoom] = []
+
+    center_of_last_room = (0, 0)
+
+
+
+    for r in range(max_rooms):
+        room_width = 40#10
+        room_height = 40#15
+
+        y = 10+(r * room_height) + (r * 6)
+
+
+
+        for s in range(house_per_street):
+            # "RectangularRoom" class makes rectangles easier to work with
+            x = 10+(s * room_width) + (s * 6)
+            new_x = x + room_width
+            new_y = y + room_height
+
+            wall_lenght = int(room_height / 2)
+            rnd = random.randint(1, 30)
+            wall_x = x + rnd
+
+            new_room = RectangularRoom(x, y, room_width, room_height)
+            # Dig out this rooms inner area.
+            dungeon.tiles[new_room.inner] = tile_types.floor
+            entity_factories.wooden_door.spawn(dungeon, int(x+(room_width / 2)), y) #spawn door top middle every house
+           # for i in range(wall_lenght):
+           #     dungeon.tiles[wall_x, 30:30+i] = tile_types.wall    #wall in house
+           # dungeon.tiles[new_x-10:new_x+5, y:new_y] = tile_types.grass
+
+
+            # new street horizontal
+            #dungeon.tiles[0:280, y] = tile_types.pavement
+            dungeon.tiles[0:280, y - 1] = tile_types.street
+            dungeon.tiles[0:280, y - 2] = tile_types.streetline_h
+            dungeon.tiles[0:280, y - 3] = tile_types.street
+            #dungeon.tiles[0:280, y - 4] = tile_types.pavement
+
+            if s < house_per_street:
+                print(s,r,x,y)
+            else:
+                print(s,r,x,y)
+
+        """
+        #new street vertical
+        dungeon.tiles[10, 10:34] = tile_types.pavement
+        dungeon.tiles[11, 10:31] = tile_types.street
+        dungeon.tiles[12, 10:32] = tile_types.streetline_v
+        dungeon.tiles[13, 10:31] = tile_types.street
+        dungeon.tiles[14, 10:31] = tile_types.pavement
+
+        # new street horizontal
+        dungeon.tiles[10:70, 10] = tile_types.pavement
+        dungeon.tiles[10:70, 11] = tile_types.street
+        dungeon.tiles[10:70, 12] = tile_types.streetline_h
+        #dungeon.tiles[12, 12] = tile_types.streetline_t_d
+        dungeon.tiles[10:70, 13] = tile_types.street
+        dungeon.tiles[10:70, 14] = tile_types.pavement
+        #dungeon.tiles[12, 13] = tile_types.streetline_v
+
+        # new street vertikal
+        dungeon.tiles[66, 10:35] = tile_types.pavement
+        dungeon.tiles[67, 10:35] = tile_types.street
+        dungeon.tiles[68, 10:35] = tile_types.streetline_v
+        dungeon.tiles[69, 10:35] = tile_types.street
+        dungeon.tiles[70, 10:35] = tile_types.pavement
+
+        # new corner ul
+
+        dungeon.tiles[66:71, 30:35] = tile_types.pavement
+        dungeon.tiles[67:70, 30:34] = tile_types.street
+        dungeon.tiles[66:70, 31:34] = tile_types.street
+        dungeon.tiles[68, 30:32] = tile_types.streetline_v
+        dungeon.tiles[66:68, 32] = tile_types.streetline_h
+        dungeon.tiles[68, 32] = tile_types.streetline_c_ul
+
+        # new corner dl
+        dungeon.tiles[66:71, 10:15] = tile_types.pavement
+        dungeon.tiles[67:70, 11:15] = tile_types.street
+        dungeon.tiles[66:70, 11:14] = tile_types.street
+        dungeon.tiles[68, 12:15] = tile_types.streetline_v
+        dungeon.tiles[66:68, 12] = tile_types.streetline_h
+        dungeon.tiles[68, 12] = tile_types.streetline_c_dl
+
+        # new corner dr
+        dungeon.tiles[10:15, 10:15] = tile_types.pavement
+        dungeon.tiles[11:14, 11:15] = tile_types.street
+        dungeon.tiles[11:15, 11:14] = tile_types.street
+        dungeon.tiles[12, 13:15] = tile_types.streetline_v
+        dungeon.tiles[12:15, 12] = tile_types.streetline_h
+        dungeon.tiles[12, 12] = tile_types.streetline_c_dr
+
+        # new corner dr
+        dungeon.tiles[10:15, 30:34] = tile_types.pavement
+        dungeon.tiles[11:14, 30:34] = tile_types.street
+        dungeon.tiles[11:15, 31:34] = tile_types.street
+        dungeon.tiles[12:15, 32] = tile_types.streetline_h
+        dungeon.tiles[12, 30:32] = tile_types.streetline_v
+        dungeon.tiles[12, 32] = tile_types.streetline_c_ur
+
+        #grass
+        dungeon.tiles[15:20, 15:30] = tile_types.grass
+        entity_factories.health_potion.spawn(dungeon, 15, 15)
+
+        #flower
+        dungeon.tiles[17, 16] = tile_types.flowers
+        dungeon.tiles[19, 17:20] = tile_types.flowers
+
+        #windows
+        dungeon.tiles[20, 18] = tile_types.window
+
+        #fence
+        dungeon.tiles[15:20, 29] = tile_types.fence
+
+        # grass
+        dungeon.tiles[10:70, 35] = tile_types.grass
+
+        #water
+        dungeon.tiles[10:70, 36:40] = tile_types.water
+        """
+
+
+
+
+        # Run through the other rooms and see if they intersect with this one.
+
+        #if any(new_room.intersects(other_room) for other_room in rooms):
+        #    continue  # This room intersects, so go to the next attempt.
+
+        # If there are no intersections then the room is valid.
+
+
+
+        if len(rooms) == 0:
+            # The first room, where the player starts.
+            player.place(*new_room.center, dungeon)
+        else:  # All rooms after the first.
+            # Dig out a tunnel between this room and the previous one.
+            for x, y in tunnel_between(rooms[-1].center, new_room.center):
+                dungeon.tiles[x, y] = tile_types.floor
+
+            center_of_last_room = new_room.center
+
+        place_entities(new_room, dungeon, engine.game_world.current_floor)
+        place_doors(new_room, dungeon, engine.game_world.current_floor)
+
+        dungeon.tiles[center_of_last_room] = tile_types.down_stairs
+        dungeon.downstairs_location = center_of_last_room
+
+        # Finally, append the new room to the list.
+        rooms.append(new_room)
+
+
+    return dungeon
+

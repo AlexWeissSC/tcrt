@@ -152,6 +152,7 @@ class GameWorld:
         map_width: int,
         map_height: int,
         max_rooms: int,
+        house_per_street: int,
         room_min_size: int,
         room_max_size: int,
         current_floor: int = 0
@@ -167,6 +168,7 @@ class GameWorld:
         self.map_height = map_height
 
         self.max_rooms = max_rooms
+        self.house_per_street = house_per_street
 
         self.room_min_size = room_min_size
         self.room_max_size = room_max_size
@@ -180,6 +182,7 @@ class GameWorld:
 
         self.engine.game_map = generate_arkham( #self.engine.game_map = generate_dungeon(
             max_rooms=self.max_rooms,
+            house_per_street=self.house_per_street,
             room_min_size=self.room_min_size,
             room_max_size=self.room_max_size,
             map_width=self.map_width,

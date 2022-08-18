@@ -53,9 +53,9 @@ class Engine:
         info_pane_width = console.width - info_pane_x
         info_pane_height = self.game_world.viewport_height
         # This is debug info.  Remove it later
-        # info_pane_title = f'({self.player.x},{self.player.y})'
+        info_pane_title = f'({self.player.x},{self.player.y})'
         # control info
-        info_pane_title = f'Controls'
+        #info_pane_title = f'Controls'
 
         #Side Window
         render_functions.draw_window(console, info_pane_x, 0, info_pane_width, info_pane_height, info_pane_title)
