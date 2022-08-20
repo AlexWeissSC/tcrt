@@ -449,8 +449,8 @@ def generate_arkham(
 
 
     for r in range(max_rooms):
-        room_width = 40#10
-        room_height = 40#15
+        room_width = 30#10
+        room_height = 30#15
 
         y = 10+(r * room_height) + (r * 6)
 
@@ -463,24 +463,52 @@ def generate_arkham(
             new_y = y + room_height
 
             wall_lenght = int(room_height / 2)
-            rnd = random.randint(1, 30)
-            wall_x = x + rnd
+            w30 = random.randint(1, 30)
+            w6 = random.randint(1, 6)
+            wall_x = x + w30
 
             new_room = RectangularRoom(x, y, room_width, room_height)
             # Dig out this rooms inner area.
             dungeon.tiles[new_room.inner] = tile_types.floor
             entity_factories.wooden_door.spawn(dungeon, int(x+(room_width / 2)), y) #spawn door top middle every house
+            dungeon.tiles[int(x+(room_width / 2)), y] = tile_types.closed_door
+            if w6 <= 2:
+                dungeon.tiles[new_x - 10:new_x + 1, y:new_y + 1] = tile_types.grass
+                dungeon.tiles[new_x - 11, y:new_y + 1] = tile_types.wall
+                dungeon.tiles[new_x - 11, int(y+(room_height / 4))] = tile_types.window
+                dungeon.tiles[new_x - 11, int(y+2*(room_height / 4))] = tile_types.window
+                dungeon.tiles[new_x - 11, int(y+3*(room_height / 4))] = tile_types.window
+
+            elif w6 <= 4:
+                dungeon.tiles[x:new_x + 1, new_y - 10:new_y + 1] = tile_types.grass
+                dungeon.tiles[x:new_x + 1, new_y - 11] = tile_types.wall
+                dungeon.tiles[int(x + (room_width / 4)), new_y - 11] = tile_types.window
+                dungeon.tiles[int(x + 2*(room_width / 4)), new_y - 11] = tile_types.window
+                dungeon.tiles[int(x + 3*(room_width / 4)), new_y - 11] = tile_types.window
+            else:
+                dungeon.tiles[new_x - 10:new_x + 1, y:new_y + 1] = tile_types.grass
+                dungeon.tiles[new_x - 11, y:new_y + 1] = tile_types.wall
+                dungeon.tiles[x:new_x + 1, new_y - 10:new_y + 1] = tile_types.grass
+                dungeon.tiles[x:new_x -10, new_y - 11] = tile_types.wall
+
            # for i in range(wall_lenght):
            #     dungeon.tiles[wall_x, 30:30+i] = tile_types.wall    #wall in house
            # dungeon.tiles[new_x-10:new_x+5, y:new_y] = tile_types.grass
 
 
             # new street horizontal
-            #dungeon.tiles[0:280, y] = tile_types.pavement
-            dungeon.tiles[0:280, y - 1] = tile_types.street
-            dungeon.tiles[0:280, y - 2] = tile_types.streetline_h
-            dungeon.tiles[0:280, y - 3] = tile_types.street
-            #dungeon.tiles[0:280, y - 4] = tile_types.pavement
+            dungeon.tiles[0:280, y - 1] = tile_types.pavement
+            dungeon.tiles[0:280, y - 2] = tile_types.street
+            dungeon.tiles[0:280, y - 3] = tile_types.streetline_h
+            dungeon.tiles[0:280, y - 4] = tile_types.street
+            dungeon.tiles[0:280, y - 5] = tile_types.pavement
+
+            # new street vertical
+            dungeon.tiles[x - 1, 0:280] = tile_types.pavement
+            dungeon.tiles[x - 2, 0:280] = tile_types.street
+            dungeon.tiles[x - 3, 0:280] = tile_types.streetline_v
+            dungeon.tiles[x - 4, 0:280] = tile_types.street
+            dungeon.tiles[x - 5, 0:280] = tile_types.pavement
 
             if s < house_per_street:
                 print(s,r,x,y)
@@ -588,7 +616,7 @@ def generate_arkham(
             center_of_last_room = new_room.center
 
         place_entities(new_room, dungeon, engine.game_world.current_floor)
-        place_doors(new_room, dungeon, engine.game_world.current_floor)
+        #place_doors(new_room, dungeon, engine.game_world.current_floor) #not used anymore
 
         dungeon.tiles[center_of_last_room] = tile_types.down_stairs
         dungeon.downstairs_location = center_of_last_room
