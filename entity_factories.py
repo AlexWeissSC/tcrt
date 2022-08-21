@@ -10,7 +10,7 @@ from entity import Actor, Item
 
 player = Actor(
     char="@",
-    color=(127, 130, 147),
+    color=(84, 93, 142), #(127, 130, 147),
     name="Professor Atwood",
     ai_cls=HostileEnemy,
     equipment=Equipment(),
@@ -34,6 +34,16 @@ rat = Actor(
     level=Level(xp_given=35),
 )
 
+spider = Actor(
+    char=chr(0x266B), #char="H",
+    color=(112, 70, 52),
+    name="Spider",
+    ai_cls=HostileEnemy,
+    equipment=Equipment(),
+    fighter=Fighter(hp=14, base_defense=1, base_power=3),
+    inventory=Inventory(capacity=0),
+    level=Level(xp_given=100),
+)
 
 hound = Actor(
     char=chr(0x263B), #char="H",
@@ -46,6 +56,53 @@ hound = Actor(
     level=Level(xp_given=100),
 )
 
+
+nygdirc = Actor(
+    char=chr(0x25CB),
+    color=(172, 226, 79),
+    name="Nygdirc",
+    ai_cls=HostileEnemy,
+    equipment=Equipment(),
+    fighter=Fighter(hp=20, base_defense=2, base_power=5),
+    inventory=Inventory(capacity=0),
+    level=Level(xp_given=125),
+)
+
+
+kaajha = Actor(
+    char=chr(0x25D9),
+    color=(112, 70, 226),
+    name="Kaajha",
+    ai_cls=HostileEnemy,
+    equipment=Equipment(),
+    fighter=Fighter(hp=26, base_defense=3, base_power=6),
+    inventory=Inventory(capacity=0),
+    level=Level(xp_given=150),
+)
+
+
+ctilpo = Actor(
+    char=chr(0x263C),
+    color=(79, 232, 249),
+    name="Ctilpo",
+    ai_cls=HostileEnemy,
+    equipment=Equipment(),
+    fighter=Fighter(hp=30, base_defense=4, base_power=7),
+    inventory=Inventory(capacity=0),
+    level=Level(xp_given=175),
+)
+
+
+grytharel = Actor(
+    char=chr(0x2642),
+    color=(249, 74, 54),
+    name="Grytharel",
+    ai_cls=HostileEnemy,
+    equipment=Equipment(),
+    fighter=Fighter(hp=50, base_defense=5, base_power=10),
+    inventory=Inventory(capacity=0),
+    level=Level(xp_given=250),
+)
 """-------Furniture-------"""
 bookcase = Actor(
     char=chr(0xC9),
@@ -81,12 +138,22 @@ metal_door = Actor(
     level=Level(xp_given=0),
 )
 
+fence_door = Actor(
+    char=chr(0xFA),
+    color=(191, 121, 88),
+    name="Garden Gate",
+    ai_cls=StandingEnemy,
+    equipment=Equipment(),
+    fighter=Door(hp=12, base_defense=0, base_power=4),
+    inventory=Inventory(capacity=0),
+    level=Level(xp_given=0),
+)
 """-------Items-------"""
 
 confusion_scroll = Item(
-    char=chr(0x2665), #char="~",
+    char=chr(0x2022), #char="~",
     color=(207, 63, 255),
-    name="Confusion Scroll",
+    name="Shot gun",
     consumable=consumable.ConfusionConsumable(number_of_turns=10),
 )
 

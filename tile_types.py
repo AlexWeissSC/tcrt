@@ -78,6 +78,13 @@ pavement = new_tile(
     light=(ord(chr(0x2593)), (122, 68, 74), (71, 45, 60)),
 )
 
+stonepath = new_tile(
+    walkable=True,
+    transparent=True,
+    dark=(ord(chr(0x25BC)), (71, 45, 60), (26, 99, 51)),
+    light=(ord(chr(0x25BC)), (104, 69, 89), (36, 135, 70)),
+)
+
 street = new_tile(
     walkable=True,
     transparent=True,
