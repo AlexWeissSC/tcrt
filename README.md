@@ -13,6 +13,11 @@ and Kenney's 1-bit-pack https://www.kenney.nl/assets/bit-pack
 
 Doors were added and some experimenting with map creation.
 
+Town creation with random house houses on a fixed grid. 
+
+Added some monsters for testing. 
+
+
 Screenshots: 
 https://imgur.com/a/XoGyzZE
 
