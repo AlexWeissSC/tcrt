@@ -12,3 +12,8 @@ http://dwarffortresswiki.org/index.php/Tileset_repository#Curses_24pt_cleartype_
 and Kenney's 1-bit-pack https://www.kenney.nl/assets/bit-pack
 
 Doors were added and some experimenting with map creation.
+
+Screenshots: 
+https://imgur.com/a/XoGyzZE
+
+![dontopenthedoor](https://user-images.githubusercontent.com/108424707/185781755-f83e0bff-c0dd-4bf1-8a10-ef3d5e3bd001.png)
