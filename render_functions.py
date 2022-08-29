@@ -83,22 +83,22 @@ def draw_window(console, x, y, width, height, title):
       height=height,
       title='',
       clear=True,
-      fg=color.window_border_bright,
+      fg=(255, 255, 255), #color.window_border_dark,
       bg=(0, 0, 0),
   )
 
   r_bright, g_bright, b_bright = color.window_border_bright
   r_dark, g_dark, b_dark = color.window_border_dark
-  r_step = (r_bright - r_dark) // 10
-  g_step = (g_bright - g_dark) // 10
-  b_step = (b_bright - b_dark) // 10
+  #r_step = (r_bright - r_dark) // 10
+  #g_step = (g_bright - g_dark) // 10
+  #b_step = (b_bright - b_dark) // 10
   x1 = x + width - 1
   y1 = y + height - 1
   #print(f'Step values: {r_step},{g_step},{b_step}')
   for i in range(0, 11):
-    r = r_dark + (r_step * i)
-    g = g_dark + (g_step * i)
-    b = b_dark + (b_step * i)
+    r = 255 #r_dark #+ (r_step * i)
+    g = 255 #g_dark #+ (g_step * i)
+    b = 255 #b_dark #+ (b_step * i)
     #print(f'({x+i},{y+i}) = {r}, {g}, {b}')
     # Horizontal lines
     if i <= width // 2:
@@ -115,4 +115,4 @@ def draw_window(console, x, y, width, height, title):
       console.tiles_rgb['fg'][x,y1-i] = (r,g,b)
 
   if title:
-    console.print_box(x=x, y=y, width=width, height=1, fg=color.window_border_bright, string=f'┤{title}├', alignment=tcod.CENTER)
+    console.print_box(x=x, y=y, width=width, height=1, fg=color.window_border_dark, string=f'┤{title}├', alignment=tcod.CENTER)

@@ -178,6 +178,7 @@ wall = new_tile(
     light=(ord(chr(0x2591)), (160, 153, 142), (102, 102, 102)),
 )
 
+#------- Doors -------
 closed_door = new_tile(
     walkable=True,
     transparent=False,
@@ -185,11 +186,25 @@ closed_door = new_tile(
     light=(ord(chr(0xD1)), (160, 153, 142), (104, 69, 89)),
 )
 
-open_door = new_tile(
+open_wooden_door = new_tile(
     walkable=True,
     transparent=True,
     dark=(ord(chr(0xAA)), (160, 153, 142), (71, 45, 60)),
     light=(ord(chr(0xAA)), (160, 153, 142), (104, 69, 89)),
+)
+
+open_metal_door = new_tile(
+    walkable=True,
+    transparent=True,
+    dark=(ord(chr(0xAA)), (160, 153, 142), (71, 45, 60)),
+    light=(ord(chr(0xAA)), (160, 153, 142), (64, 129, 150)),
+)
+
+open_fence_door = new_tile(
+    walkable=True,
+    transparent=True,
+    dark=(ord(chr(0xF1)), (191, 121, 88), (26, 99, 51)),
+    light=(ord(chr(0xF1)), (191, 121, 88), (36, 135, 70)),
 )
 
 window = new_tile(
@@ -203,7 +218,7 @@ fence = new_tile(
     walkable=False,
     transparent=True,
     dark=(ord(chr(0xF3)), (191, 121, 88), (26, 99, 51)),
-    light=(ord(chr(0xF3)), (191, 121, 88), (26, 99, 51)),
+    light=(ord(chr(0xF3)), (191, 121, 88), (36, 135, 70)),
 )
 
 water = new_tile(
@@ -220,7 +235,3 @@ down_stairs = new_tile(
     light=(ord(">"), (191, 121, 88), (104, 69, 89)),
 )
 
-# Wall with glyph chr(0x2550)
-#wall_n = new_tile(
-#    walkable=False, transparent=False, dark=(ord(chr(0x2550)), (255, 0, 0), (0, 0, 100)),
-#)

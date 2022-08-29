@@ -28,4 +28,4 @@ menu_title = (255, 255, 63)
 menu_text = white
 
 window_border_bright = (225,225,255)
-window_border_dark = (160, 153, 142)
+window_border_dark = (255, 255, 255)

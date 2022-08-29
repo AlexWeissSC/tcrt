@@ -482,11 +482,16 @@ def generate_arkham(
 
                 #-------Monster Test-------
 
-                entity_factories.spider.spawn(dungeon, int(new_x - 5), y+2)
-                entity_factories.nygdirc.spawn(dungeon, int(new_x - 4), y + 3)
-                entity_factories.kaajha.spawn(dungeon, int(new_x - 6), y + 4)
-                entity_factories.ctilpo.spawn(dungeon, int(new_x - 5), new_y - 2)
-                entity_factories.grytharel.spawn(dungeon, int(new_x - 6), new_y - 3)
+                if r<=2: #the farther down the stronger the monsters
+                    entity_factories.spider.spawn(dungeon, int(new_x - 5), y+2)
+                elif r<=4:
+                    entity_factories.nygdirc.spawn(dungeon, int(new_x - 4), y + 3)
+                elif r<=6:
+                    entity_factories.kaajha.spawn(dungeon, int(new_x - 6), y + 4)
+                elif r<=8:
+                    entity_factories.ctilpo.spawn(dungeon, int(new_x - 5), new_y - 2)
+                else:
+                    entity_factories.grytharel.spawn(dungeon, int(new_x - 6), new_y - 3)
 
 
                 dungeon.tiles[new_x - 11, int(y+(room_height / 4))] = tile_types.window

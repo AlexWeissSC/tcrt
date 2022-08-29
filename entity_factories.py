@@ -21,6 +21,9 @@ player = Actor(
 
 """"-------NPCs-------"""
 
+
+
+
 """-------Monster-------"""
 
 rat = Actor(
@@ -122,7 +125,7 @@ wooden_door = Actor(
     name="Wooden door",
     ai_cls=StandingEnemy,
     equipment=Equipment(),
-    fighter=Door(hp=16, base_defense=0, base_power=4),
+    fighter=Door(hp=16, base_defense=0, base_power=4, char_open="open_wooden_door"),
     inventory=Inventory(capacity=0),
     level=Level(xp_given=0),
 )
@@ -133,7 +136,7 @@ metal_door = Actor(
     name="Metal door",
     ai_cls=StandingEnemy,
     equipment=Equipment(),
-    fighter=Door(hp=32, base_defense=0, base_power=4),
+    fighter=Door(hp=32, base_defense=0, base_power=4, char_open="open_metal_door"),
     inventory=Inventory(capacity=0),
     level=Level(xp_given=0),
 )
@@ -144,7 +147,7 @@ fence_door = Actor(
     name="Garden Gate",
     ai_cls=StandingEnemy,
     equipment=Equipment(),
-    fighter=Door(hp=12, base_defense=0, base_power=4),
+    fighter=Door(hp=12, base_defense=0, base_power=4, char_open="open_fence_door"),
     inventory=Inventory(capacity=0),
     level=Level(xp_given=0),
 )

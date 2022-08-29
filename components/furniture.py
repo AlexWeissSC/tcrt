@@ -18,11 +18,12 @@ if TYPE_CHECKING:
 class Door(BaseComponent):
     parent: Actor
 
-    def __init__(self, hp: int, base_defense: int, base_power: int):
+    def __init__(self, hp: int, base_defense: int, base_power: int, char_open: str = "?",):
         self.max_hp = hp
         self._hp = hp
         self.base_defense = base_defense
         self.base_power = base_power
+        self.char_open = char_open
 
     @property
     def hp(self) -> int:
@@ -67,14 +68,17 @@ class Door(BaseComponent):
 
         x = self.parent.x
         y = self.parent.y
-        self.gamemap.tiles[x, y] = tile_types.open_door
 
-        self.parent.char = chr(0xAA)
-        self.parent.color = (191, 121, 88)
+        self.gamemap.tiles[x, y] = getattr(tile_types, self.char_open)
+        #self.parent.char = chr(0xAA)
+        #self.parent.color = (191, 121, 88)
+        self.parent.char = chr(0x00)
+        self.parent.color = (0, 0, 0)
         self.parent.blocks_movement = False
         self.parent.ai = None
         self.parent.name = f"Open {self.parent.name}"
         self.parent.render_order = RenderOrder.CORPSE
+
 
         self.engine.message_log.add_message(death_message, death_message_color)
 
